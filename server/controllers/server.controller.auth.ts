@@ -2,6 +2,8 @@ import pool from "../database/database.js";
 import bcrypt from "bcrypt";
 import { use } from "bcrypt/promises.js";
 import { json, type Request, type Response } from "express";
+import { randomBytes, createHash } from "node:crypto";
+
 
 export const Register = async (req: Request, res: Response) => {
     try {
@@ -89,6 +91,33 @@ export async function Login(req: Request, res: Response) {
                 message: "Invalid email or password"
             });
         }
+
+        // Create a random session token
+        const sessionToken = randomBytes(32).toString("hex");
+
+        // Store a hash of the token in the database
+        const sessionId = createHash("sha256")
+            .update(sessionToken)
+            .digest("hex");
+
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+        await pool.query(
+            `INSERT INTO public.sessions
+                (session_id, user_id, expires_at)
+                VALUES ($1, $2, $3)`,
+            [sessionId, user.id, expiresAt]
+        );
+
+        // Send the token in an HTTP-only cookie
+        res.cookie("sessionId", sessionToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000,
+            path: "/",
+        });
+
 
         return res.status(200).json({
             success: true,
