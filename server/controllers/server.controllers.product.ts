@@ -17,7 +17,7 @@ export const ProductsPlants = async (
 
   const { name, types_of_plants, price, cogs ,stock_quantity, description, care_level, light_requirement, water_frequency, mature_size, is_available, } = req.body;
 
-  if (!name || !types_of_plants || !price || !cogs || !stock_quantity || !description || is_available === undefined) {
+  if (!name || !types_of_plants || !price || cogs !== undefined || !stock_quantity || !description || !care_level || !light_requirement || !water_frequency || !mature_size ||  is_available === undefined) {
     return res.status(400).json({
       message: "Please fill up all the fields.",
     });
@@ -80,7 +80,7 @@ export const ProductsPlants = async (
       )
       VALUES (
         $1, $2, $3, $4, $5, $6, $7,
-        $8, $9, $10, $11
+        $8, $9, $10, $11, $12
       )
       RETURNING *;
     `;
