@@ -1,14 +1,119 @@
-import { SideBar } from "../components/components.sidebar";
+import { useState, useEffect } from "react";
 
 function AddListingPage() {
+
+  // form state
+  const [name, setName] = useState<string>("");
+  const [typeOfPlants, setTypeOfPlants] = useState<string>("");
+  const [Price, setPrice] = useState<number>(0);
+  const [StockQuantity, setStockQuantity] = useState<number>(0);
+  const [Cogs, setCogs] = useState<number>(0);
+  const [description, setDescription] = useState<string>("");
+  const [careLevel, setCareLevel] = useState<string>("");
+  const [light, setLight] = useState<string>("");
+  const [waterFrequency, setWaterFrequency] = useState<string>("");
+  const [matureSize, setMatureSize] = useState<string>("");
+  const [isAvailable, setIsAvailable] = useState<boolean>(false);
+
+  const handleFormData = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      const response = await fetch("http://localhost:5000/api/v2/addListingPlants/products/addlisting_plants", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json" // Ensure this is fixed!
+        },
+        body: JSON.stringify({
+          name,
+          types_of_plants: typeOfPlants,
+          price: Price,
+          stock_quantity: StockQuantity,
+          Cogs,
+          description,
+          care_level: careLevel,
+          light_requirement: light,
+          water_frequency: waterFrequency,
+          mature_size: matureSize,
+          is_available: isAvailable
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Success message from backend:", data.message);
+        console.log("Data:", data.product);
+        updated()
+        Fetchproduct();
+
+
+      } else {
+        console.warn("Backend validation/error message:", data.message);
+      }
+
+    } catch (error) {
+      console.error("The request failed completely before reaching or returning from the backend:", error);
+    }
+
+
+    function updated() {
+      setName(""), setPrice(0), setTypeOfPlants(""), setStockQuantity(0), setDescription(""), setCogs(0), setCareLevel("")
+    }
+
+  };
+
+
+
+  interface Product {
+    id: number;
+    name: string;
+    types_of_plants: string;
+    price: number;
+    stock_quantity: number;
+    cogs: number
+    description: string;
+    care_level: string | null;
+    light_requirement: string | null;
+    water_frequency: string | null;
+    mature_size: string | null;
+    is_available: boolean;
+  }
+
+  const [product, setProduct] = useState<Product[]>([]);
+
+  const Fetchproduct = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/v2/addListingPlants/products/getAllPlants", {
+        method: "GET",
+        credentials: "include",
+      })
+
+      const data = await response.json();
+
+      if (response.ok) {
+
+        if (Array.isArray(data.product)) {
+          setProduct(data.product)
+        } else {
+          setProduct(data.product)
+        }
+      } else {
+        console.log(data.message)
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  useEffect(() => {
+    Fetchproduct();
+  }, [])
+
+
+
   return (
     <div className="flex h-screen w-full overflow-hidden bg-[#F3F5F1]">
-
-      {/* Sidebar */}
-      <aside className="w-70 shrink-0 overflow-y-auto bg-[#E8ECE5]">
-        <SideBar />
-      </aside>
-
       {/* Main Content */}
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden p-5 lg:p-6">
 
@@ -54,7 +159,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. Monstera Deliciosa"
+                    value={name}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
 
@@ -65,7 +172,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. Tropical houseplant"
+                    value={typeOfPlants}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setTypeOfPlants(e.target.value)}
                   />
                 </div>
 
@@ -76,7 +185,22 @@ function AddListingPage() {
                   <input
                     type="number"
                     placeholder="e.g. 45.00"
+                    value={Price}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setPrice(e.target.valueAsNumber)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-[#34412F]">
+                    Cost of product
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="e.g. 45.00"
+                    value={Cogs}
+                    className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setCogs(e.target.valueAsNumber)}
                   />
                 </div>
 
@@ -87,7 +211,9 @@ function AddListingPage() {
                   <input
                     type="number"
                     placeholder="e.g. 12"
+                    value={StockQuantity}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setStockQuantity(e.target.valueAsNumber)}
                   />
                 </div>
               </div>
@@ -99,30 +225,11 @@ function AddListingPage() {
                 <textarea
                   rows={3}
                   placeholder="Add a short description of the plant, its growth stage, and any care notes buyers should know before purchase."
+                  value={description}
                   className="mt-1.5 w-full resize-y rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-[#34412F]">
-                  Plant photo
-                </label>
-                <label className="mt-1.5 flex min-h-30 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-[#D5DDD0] bg-[#EDF0E9]/70 p-4 hover:bg-[#E5EADF]">
-                  <span className="text-lg text-[#587655]">↑</span>
-                  <span className="text-sm font-semibold text-[#354231]">
-                    Choose image
-                  </span>
-                  <span className="mt-1 text-xs text-[#7A8175]">
-                    Browse files from your device
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="mt-2 block w-full max-w-50 text-xs"
-                  />
-                </label>
-              </div>
-
               <div>
                 <h3 className="text-base font-semibold text-[#354231]">
                   Care requirements
@@ -140,7 +247,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. Beginner friendly"
+                    value={careLevel}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setCareLevel(e.target.value)}
                   />
                 </div>
 
@@ -151,7 +260,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. Bright indirect"
+                    value={light}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setLight(e.target.value)}
                   />
                 </div>
 
@@ -162,7 +273,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. Water weekly"
+                    value={waterFrequency}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setWaterFrequency(e.target.value)}
                   />
                 </div>
 
@@ -173,7 +286,9 @@ function AddListingPage() {
                   <input
                     type="text"
                     placeholder="e.g. 4–6 ft tall"
+                    value={matureSize}
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setMatureSize(e.target.value)}
                   />
                 </div>
               </div>
@@ -195,6 +310,7 @@ function AddListingPage() {
                   <select
                     defaultValue="true"
                     className="mt-1.5 w-full rounded-lg border border-[#DCE2D7] bg-[#EDF0E9] px-3 py-2.5 text-sm outline-none focus:border-[#587655]"
+                    onChange={(e) => setIsAvailable(e.target.value === "true")}
                   >
                     <option value="true">Available now</option>
                     <option value="false">Unavailable</option>
@@ -229,6 +345,7 @@ function AddListingPage() {
                 <button
                   type="submit"
                   className="rounded-lg bg-[#587655] px-4 py-2 text-xs font-semibold text-white hover:bg-[#456243]"
+                  onClick={handleFormData}
                 >
                   Save plant listing
                 </button>
@@ -262,50 +379,30 @@ function AddListingPage() {
 
             {/* Plant 1 */}
             <div className="mb-2.5 flex items-center justify-between gap-3 rounded-lg border border-[#DCE2D7] bg-[#EDF0E9]/80 p-3">
-              <div className="min-w-0">
-                <h3 className="text-xs font-semibold text-[#354231]">
-                  Monstera Deliciosa
-                </h3>
-                <p className="mt-1 text-[10px] text-[#7A8175]">
-                  Tropical houseplant • ₱45.00 • 12 in stock
-                </p>
-              </div>
-              <span className="shrink-0 rounded-full border border-[#DCE2D7] bg-white px-2 py-1 text-[10px] text-[#43523D]">
-                Available
-              </span>
+              {product.length === 0 ? (
+                <div className="w-full flex justify-between">
+                  <div>
+                    <h3 className="text-xs font-semibold text-[#354231">no product exist yet</h3>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-full flex flex-col gap-2"> {/* Optional: Wrapper div if you are rendering multiple items */}
+                  {product.map((value, index) => (
+                    <div className="w-full flex justify-between" key={index}>
+                      <div>
+                        <h3 className="text-xs font-semibold text-[#354231]">{value.name}</h3>
+                        <p className="mt-1 text-[10px] text-[#7A8175]">{value.price}</p>
+                      </div>
+                      <span className="shrink-0 rounded-full border border-[#DCE2D7] bg-white px-2 py-1 text-[10px] text-[#43523D]">
+                        {value.is_available ? "available" : "unavailable"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-
-            {/* Plant 2 */}
-            <div className="mb-2.5 flex items-center justify-between gap-3 rounded-lg border border-[#DCE2D7] bg-[#EDF0E9]/80 p-3">
-              <div className="min-w-0">
-                <h3 className="text-xs font-semibold text-[#354231]">
-                  Snake Plant Laurentii
-                </h3>
-                <p className="mt-1 text-[10px] text-[#7A8175]">
-                  Low-maintenance houseplant • ₱28.00 • 8 in stock
-                </p>
-              </div>
-              <span className="shrink-0 rounded-full border border-[#DCE2D7] bg-white px-2 py-1 text-[10px] text-[#43523D]">
-                Available
-              </span>
-            </div>
-
-            {/* Plant 3 */}
-            <div className="mb-2.5 flex items-center justify-between gap-3 rounded-lg border border-[#DCE2D7] bg-[#EDF0E9]/80 p-3">
-              <div className="min-w-0">
-                <h3 className="text-xs font-semibold text-[#354231]">
-                  Philodendron Birkin
-                </h3>
-                <p className="mt-1 text-[10px] text-[#7A8175]">
-                  Collector houseplant • ₱38.00 • 5 in stock
-                </p>
-              </div>
-              <span className="shrink-0 rounded-full border border-[#DCE2D7] bg-white px-2 py-1 text-[10px] text-[#43523D]">
-                Available
-              </span>
-            </div>
-
             {/* Note */}
+
             <div className="mt-3 rounded-lg border border-[#DCE2D7] bg-[#EDF0E9]/80 p-3">
               <h3 className="text-xs font-semibold text-[#354231]">
                 Sample content note
