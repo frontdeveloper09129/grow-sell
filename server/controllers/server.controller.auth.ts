@@ -1,6 +1,5 @@
 import pool from "../database/database.js";
 import bcrypt from "bcrypt";
-import { use } from "bcrypt/promises.js";
 import { json, type Request, type Response } from "express";
 import { randomBytes, createHash } from "node:crypto";
 
@@ -136,4 +135,48 @@ export async function Login(req: Request, res: Response) {
             message: "An internal server error occurred"
         });
     }
+}
+
+export const CheckUserSession = async (req: Request, res: Response) => {
+    // Read directly from what the middleware attached
+    const userId = (req as any).userId;
+    const username = (req as any).username;
+
+    return res.status(200).json({
+        message: "login successfully",
+        success: true,
+        logined: true,
+        userId: userId,
+        username: username // Now you can pass this safely to your Tailwind profile component!
+    });
+};
+
+
+export const Logout = async (req: Request, res: Response) => {
+    const sessionId = req.cookies.sessionId;
+
+    if (!sessionId) {
+        return res.status(400).json({ message: "session is not valid or logout" })
+    }
+
+    const hashedSessionId = createHash('sha256')
+        .update(sessionId)
+        .digest('hex');
+
+    const result = await pool.query(
+        "DELETE FROM public.sessions WHERE session_id = $1 RETURNING session_id", [hashedSessionId]
+    );
+
+    if (result.rowCount === 0) {
+        return res.status(401).json({ message: "session is expired or invalid" })
+    };
+
+    res.clearCookie("sessionId", {
+        path: "/",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax"
+    });
+
+    return res.status(200).json({ message: "logout succesfully", Logout: true, success: true })
 }

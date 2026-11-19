@@ -70,8 +70,8 @@ function AddListingPage() {
     name: string;
     types_of_plants: string;
     price: number;
+    cogs: number;
     stock_quantity: number;
-    cogs: number
     description: string;
     care_level: string | null;
     light_requirement: string | null;
