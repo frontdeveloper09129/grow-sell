@@ -9,8 +9,9 @@ function Login() {
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL;
 
-        const response = await fetch("http://localhost:5000/api/v1/auth/login", {
+        const response = await fetch(`${AUTH_API}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
