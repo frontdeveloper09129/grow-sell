@@ -18,13 +18,17 @@ if (!process.env.DATABASE_URL) {
 }
 
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://grow-sell-1.onrender.com"
+];
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
 app.use(express.json({ limit: "10kb" }));
 
 // this is for getting the session from the browser
