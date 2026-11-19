@@ -172,7 +172,7 @@ function TopSellingPlants() {
                         {/* Product Rows */}
                         {products.map((item, index) => {
 
-                            const income = Number(item.total_income);
+                            const income = Number(item.total_income)
 
                             const incomeShare = totalIncome > 0
                                 ? (income / totalIncome) * 100

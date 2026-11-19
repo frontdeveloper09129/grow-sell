@@ -1,7 +1,7 @@
 import { SideBar } from "../components/components.sidebar";
 import { useNavStore } from "../store/store";
 import PlantListingPage from "./plantListingPage.tsx";
-import OverView from "../components/overview.components";
+import OverView from "../components/overview.components.tsx";
 import AddListingPage from "./addListingPage.tsx";
 import { useEffect} from "react";
 

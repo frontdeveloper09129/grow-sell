@@ -392,7 +392,7 @@ function OverView() {
                                                     {/* Horizontal grid lines */}
                                                     <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
 
-                                                        {graphAnalysis.yAxisLabels.map((label, index) => (
+                                                        {graphAnalysis.yAxisLabels.map((index) => (
                                                             <div
                                                                 key={index}
                                                                 className="w-full border-t border-gray-200"
