@@ -10,8 +10,10 @@ export function Registration() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+
+        const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL;
         try {
-            const response = await fetch("http://localhost:5000/api/v1/auth/registration", {
+            const response = await fetch(`${AUTH_API}`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
