@@ -18,13 +18,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://grow-sell-1.onrender.com"
-];
+const allowedOrigins = process.env.IS_PRODUCTION === 'true';
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: allowedOrigins ? "https://grow-sell-1.onrender.com" : "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
