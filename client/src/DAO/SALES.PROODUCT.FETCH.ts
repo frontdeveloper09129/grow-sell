@@ -1,12 +1,12 @@
 
 export const saleFetchData = async () => {
     // 1. Grab the base URL
-    const API_BASE = import.meta.env.VITE_SALESANALYSIS_API_URL;
-    console.log(API_BASE)
+    const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL === 'true';
+    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
 
 
     try {
-        const Response = await fetch(`${API_BASE}/sale_analysis/product`, {
+        const Response = await fetch(`${API_URL}/api/v2/addListingPlants/sale_analysis/product`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -31,10 +31,11 @@ export const saleFetchData = async () => {
 
 
 export const sales_income_summary = async () => {
-    const API_BASE = import.meta.env.VITE_SALESANALYSIS_API_URL;
+    const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL === 'true';
+    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
 
     try {
-        const Response = await fetch(`${API_BASE}/sales_income_summary`, {
+        const Response = await fetch(`${API_URL}/api/v2/addListingPlants/sales_income_summary`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -60,11 +61,12 @@ export const sales_income_summary = async () => {
 
 
 export const Fecth_sales_income_product = async () => {
-    const API_BASE = import.meta.env.VITE_SALESANALYSIS_API_URL;
+    const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL === 'true';
+    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
 
 
      try {
-        const Response = await fetch(`${API_BASE}/sales/get/product`, {
+        const Response = await fetch(`${API_URL}/api/v2/addListingPlants/sales/get/product`, {
             method: "GET",
             credentials: "include",
             headers: {
