@@ -21,8 +21,8 @@ function Login() {
             body: JSON.stringify({ email, password })
 
         });
-
-        const data = await response.json();
+        const text = await response.text()
+        const data = text ? JSON.parse(text) : null
 
         if (response.ok) {
             console.log(data)
