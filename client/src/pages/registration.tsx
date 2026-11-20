@@ -10,9 +10,10 @@ export function Registration() {
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
-        const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL;
+        const AUTH_API:any = import.meta.env.VITE_AUTH_API_URL === "true";
+        const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
         try {
-            const response = await fetch(`${AUTH_API}`, {
+            const response = await fetch(`${API_URL}/api/v1/auth/registration`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
