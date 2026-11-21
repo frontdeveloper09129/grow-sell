@@ -271,7 +271,7 @@ function OverView() {
                                 ) : (
                                     <div className='w-full justify-center flex flex-col p-2 gap-2'>
                                         <span className='text-[#080808] text-[30px]'>
-                                            {product?.totalProduct}
+                                            {product?.totalProduct ? product?.totalProduct : 0}
                                         </span>
                                         <p>Active listings · not units sold</p>
                                     </div>
