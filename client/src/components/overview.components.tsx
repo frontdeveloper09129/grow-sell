@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faLeaf, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faLeaf, faArrowTrendUp, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { saleFetchData, sales_income_summary, Fecth_sales_income_product } from "../DAO/SALES.PROODUCT.FETCH.ts";
 import TopSellingPlants from './topSellingProduct.tsx';
 
@@ -92,6 +91,14 @@ function OverView() {
     const Year: number = now.getFullYear()
     const Dates: number = now.getDate()
     const [isLoading, setLoading] = useState<boolean>(false);
+    const metricCardsRef = useRef<HTMLDivElement>(null);
+
+    const scrollMetricCards = (direction: number) => {
+        metricCardsRef.current?.scrollBy({
+            left: direction * 240,
+            behavior: "smooth"
+        });
+    };
 
 
 
@@ -222,11 +229,21 @@ function OverView() {
 
 
             {/* main content sale review */}
-            <div className='w-full h-full'>
+            <div className='w-full h-full p-2'>
                 {/* sales analysis calculating product conatiner */}
-                <div className='flex w-full gap-2 p-2 sm:gap-3 xl:gap-7'>
+                <div className="relative p-3">
+                    <button
+                        type="button"
+                        aria-label="Show previous sales metrics"
+                        onClick={() => scrollMetricCards(-1)}
+                        className="absolute left-0 top-1/2 z-10 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#FFFFFF] text-[#2F3A2A] shadow-sm md:flex"
+                    >
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                    </button>
+
+                    <div ref={metricCardsRef} className='flex w-full gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory p-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-3 xl:gap-7'>
                     {/* total income */}
-                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#587655]'>
+                    <div className='w-30 shrink-0 snap-start h-40 rounded-xl bg-[#587655] sm:w-45'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between gap-1 p-2'>
                                 <p className='min-w-0 text-xs text-white'>Total Income</p>
@@ -255,7 +272,7 @@ function OverView() {
                     </div>
 
                     {/* total product */}
-                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='w-30 shrink-0 snap-start h-40 rounded-xl bg-[#FFFFFF] sm:w-45'>
                         <div className='w-full h-full flex flex-col p-2 '>
                             <div className='w-full flex justify-between gap-1 p-2'>
                                 <h1 className='min-w-0 text-xs text-[#080808]'>Total Product</h1>
@@ -282,7 +299,7 @@ function OverView() {
                     </div>
 
                     {/* units sold */}
-                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='w-30 shrink-0 snap-start h-40 rounded-xl bg-[#FFFFFF] sm:w-45'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between gap-1 p-2'>
                                 <p className='min-w-0 text-xs text-black'>Unit Sold</p>
@@ -311,7 +328,7 @@ function OverView() {
                     </div>
 
                     {/* income change */}
-                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='w-30 shrink-0 snap-start h-40 rounded-xl bg-[#FFFFFF] sm:w-45'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between gap-1 p-2'>
                                 <p className='min-w-0 text-xs text-black'>Income Changes</p>
@@ -342,6 +359,15 @@ function OverView() {
                             </div>
                         </div>
                     </div>
+                </div>
+                    <button
+                        type="button"
+                        aria-label="Show next sales metrics"
+                        onClick={() => scrollMetricCards(1)}
+                        className="absolute right-0 top-1/2 z-10 hidden h-9 w-9 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#FFFFFF] text-[#2F3A2A] shadow-sm md:flex"
+                    >
+                        <FontAwesomeIcon icon={faChevronRight} />
+                    </button>
                 </div>
 
                 {/* sales product analysis and top selling */}

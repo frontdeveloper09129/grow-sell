@@ -145,9 +145,9 @@ export function SideBar() {
     }
 
     return (
-        <div className="w-full shrink-0 lg:w-auto">
+        <div className="fixed inset-x-0 top-0 z-50 w-full shrink-0 lg:static lg:w-auto">
 
-            <div className="flex items-center justify-between p-4 lg:hidden">
+            <div className="relative z-10 flex items-center justify-between p-4 lg:hidden">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-[#587655] flex justify-center items-center text-center rounded-xl">
                         <h1 className="text-[#FFFFFF] text-sm">P</h1>
@@ -166,8 +166,16 @@ export function SideBar() {
                 </button>
             </div>
 
+            {isMenuOpen && (
+                <button
+                    type="button"
+                    aria-label="Close navigation menu"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="fixed inset-0 z-0 bg-[#2F3A2A]/35 backdrop-blur-sm lg:hidden"
+                />
+            )}
 
-            <aside className={`${isMenuOpen ? "flex" : "hidden"} w-full shrink-0 flex-col gap-4 p-4 lg:flex lg:min-h-screen lg:max-w-75 lg:p-5 lg:gap-10`}>
+            <aside className={`${isMenuOpen ? "flex" : "hidden"} relative z-10 max-h-[calc(100svh-72px)] w-full shrink-0 flex-col gap-4 overflow-y-auto bg-[#E8ECE5] p-4 shadow-sm lg:max-h-none lg:flex lg:min-h-screen lg:max-w-75 lg:overflow-visible lg:bg-transparent lg:p-5 lg:gap-10 lg:shadow-none`}>
                 <div className="hidden w-full gap-4 lg:flex">
                     <div className="w-12.5 h-12.5 bg-[#587655] flex justify-center items-center text-center rounded-xl">
                         <h1 className="text-[#FFFFFF] text-sm">P</h1>

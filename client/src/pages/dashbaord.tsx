@@ -46,11 +46,11 @@ export function Dashboard() {
 
 
     return (
-        <div className="w-full min-h-screen bg-[#E8ECE5] flex flex-col lg:flex-row">
+        <div className="relative w-full min-h-screen bg-[#E8ECE5] flex flex-col lg:flex-row">
             <SideBar />
             {/* main content */}
 
-            <div className="w-full min-w-0 min-h-screen bg-[#F8F9F6] p-3 sm:p-4 flex flex-col gap-6 lg:gap-10">
+            <div className="w-full min-w-0 min-h-screen bg-[#F8F9F6] p-3 pt-18 sm:p-4 sm:pt-18 flex flex-col gap-6 lg:p-4 lg:gap-10">
 
                 <div className="w-full h-full flex flex-col gap-7">
                     {/* top */}
