@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf, faMessage, faUserFriends, faGear, faBox } from "@fortawesome/free-solid-svg-icons";
+import { faLeaf, faMessage, faUserFriends, faGear, faBox, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { type IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { useNavStore } from "../store/store";
 
@@ -116,6 +116,7 @@ export function SideBar() {
     ];
 
     const [profileName, SetProfileName] = useState<string>("")
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
     const Profile = async () => {
         const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
@@ -144,11 +145,30 @@ export function SideBar() {
     }
 
     return (
-        <div>
+        <div className="w-full shrink-0 lg:w-auto">
+
+            <div className="flex items-center justify-between p-4 lg:hidden">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-[#587655] flex justify-center items-center text-center rounded-xl">
+                        <h1 className="text-[#FFFFFF] text-sm">P</h1>
+                    </div>
+                    <h1 className="text-[#2F3A2A]">Grow Selling</h1>
+                </div>
+
+                <button
+                    type="button"
+                    aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-expanded={isMenuOpen}
+                    onClick={() => setIsMenuOpen((open) => !open)}
+                    className="w-10 h-10 rounded-xl bg-[#FFFFFF] flex items-center justify-center text-[#2F3A2A]"
+                >
+                    <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} />
+                </button>
+            </div>
 
 
-            <aside className="w-full shrink-0 flex flex-col gap-4 p-4 lg:min-h-screen lg:max-w-75 lg:p-5 lg:gap-10">
-                <div className="w-full flex gap-4">
+            <aside className={`${isMenuOpen ? "flex" : "hidden"} w-full shrink-0 flex-col gap-4 p-4 lg:flex lg:min-h-screen lg:max-w-75 lg:p-5 lg:gap-10`}>
+                <div className="hidden w-full gap-4 lg:flex">
                     <div className="w-12.5 h-12.5 bg-[#587655] flex justify-center items-center text-center rounded-xl">
                         <h1 className="text-[#FFFFFF] text-sm">P</h1>
                     </div>
@@ -170,7 +190,7 @@ export function SideBar() {
                 </div>
                 <div className="w-full lg:w-57 h-full flex items-center justify-center">
                     <nav className="w-full h-full flex flex-col gap-4 lg:gap-7">
-                        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:flex lg:flex-col">
+                        <ul className="flex flex-col gap-2">
                             {list.map((item: any, index: number) => {
                                 const label =
                                     item.overview ??
@@ -185,7 +205,10 @@ export function SideBar() {
                                         className={`w-full h-10.5 rounded-xl flex items-center p-3 lg:p-4 text-sm gap-2 cursor-pointer transition-colors duration-300 ease-in-out
                                                    ${item.isCorrect ? "bg-[#ffff]" : ""}
                                                `}
-                                        onClick={() => ListHandleClick(index)}
+                                        onClick={() => {
+                                            ListHandleClick(index)
+                                            setIsMenuOpen(false)
+                                        }}
                                     >
                                         <FontAwesomeIcon icon={item.icon} />
                                         <span>{label}</span>

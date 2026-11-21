@@ -224,12 +224,12 @@ function OverView() {
             {/* main content sale review */}
             <div className='w-full h-full'>
                 {/* sales analysis calculating product conatiner */}
-                <div className='grid w-full grid-cols-1 gap-3 p-2 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7'>
+                <div className='flex w-full gap-2 p-2 sm:gap-3 xl:gap-7'>
                     {/* total income */}
-                    <div className='w-full h-40 rounded-xl bg-[#587655]'>
+                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#587655]'>
                         <div className='w-full h-full flex flex-col p-2'>
-                            <div className='w-full h-10 flex justify-between p-2'>
-                                <p className='w-25 text-white size-1'>Total Income</p>
+                            <div className='w-full h-10 flex justify-between gap-1 p-2'>
+                                <p className='min-w-0 text-xs text-white'>Total Income</p>
                                 <FontAwesomeIcon className='text-white' icon={faCreditCard} />
                             </div>
 
@@ -242,11 +242,11 @@ function OverView() {
                                         </div>
                                     ) : (
                                         <>
-                                            <span className="text-[30px] text-white">
+                                            <span className="break-all text-lg leading-tight text-white sm:text-[30px]">
                                                 {product?.totalIncome.toLocaleString()}
                                             </span>
 
-                                            <p>September 2026 · USD</p>
+                                            <p className="text-xs break-words sm:text-base">September 2026 · USD</p>
                                         </>
                                     )}
                                 </div>
@@ -255,10 +255,10 @@ function OverView() {
                     </div>
 
                     {/* total product */}
-                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2 '>
-                            <div className='w-full flex justify-between p-2'>
-                                <h1 className='w-full text-[#080808] size-1'>Total Product</h1>
+                            <div className='w-full flex justify-between gap-1 p-2'>
+                                <h1 className='min-w-0 text-xs text-[#080808]'>Total Product</h1>
                                 <FontAwesomeIcon icon={faLeaf} className='text-[#080808]' />
                             </div>
 
@@ -270,10 +270,10 @@ function OverView() {
                                     </div>
                                 ) : (
                                     <div className='w-full justify-center flex flex-col p-2 gap-2'>
-                                        <span className='text-[#080808] text-[30px]'>
+                                        <span className='break-all text-[#080808] text-lg leading-tight sm:text-[30px]'>
                                             {product?.totalProduct ? product?.totalProduct : 0}
                                         </span>
-                                        <p>Active listings · not units sold</p>
+                                        <p className="text-xs break-words sm:text-base">Active listings · not units sold</p>
                                     </div>
                                 )}
 
@@ -282,10 +282,10 @@ function OverView() {
                     </div>
 
                     {/* units sold */}
-                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2'>
-                            <div className='w-full h-10 flex justify-between p-2'>
-                                <p className='w-25 text-black size-1'>Unit Sold</p>
+                            <div className='w-full h-10 flex justify-between gap-1 p-2'>
+                                <p className='min-w-0 text-xs text-black'>Unit Sold</p>
                                 <FontAwesomeIcon className='text-black' icon={faLeaf} />
                             </div>
 
@@ -298,11 +298,11 @@ function OverView() {
                                         </div>
                                     ) : (
                                         <>
-                                            <span className="text-[30px] text-black">
+                                            <span className="break-all text-lg leading-tight text-black sm:text-[30px]">
                                                 {product?.productSold}
                                             </span>
 
-                                            <p>September 2026 · USD</p>
+                                            <p className="text-xs break-words sm:text-base">September 2026 · USD</p>
                                         </>
                                     )}
                                 </div>
@@ -311,10 +311,10 @@ function OverView() {
                     </div>
 
                     {/* income change */}
-                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='min-w-0 flex-1 h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2'>
-                            <div className='w-full h-10 flex justify-between p-2'>
-                                <p className='w-full text-black size-1'>Income Changes</p>
+                            <div className='w-full h-10 flex justify-between gap-1 p-2'>
+                                <p className='min-w-0 text-xs text-black'>Income Changes</p>
                                 <FontAwesomeIcon className='text-black' icon={faArrowTrendUp} />
                             </div>
 
@@ -327,7 +327,7 @@ function OverView() {
                                         </div>
                                     ) : (
                                         <>
-                                            <span className="text-[30px] text-black flex gap-1">
+                                            <span className="break-all text-lg leading-tight text-black flex gap-1 sm:text-[30px]">
                                                 <p
                                                     className={((product?.changeIncome) ?? 0) > 0 ?
                                                         "text-green-600" : "text-red-500"}>
@@ -335,7 +335,7 @@ function OverView() {
                                                 {`${((product?.changeIncome) ?? 0).toFixed(2)}%`}
                                             </span>
 
-                                            <p>vs. $10,000 in August · +$2,000</p>
+                                            <p className="text-xs break-words sm:text-base">vs. $10,000 in August · +$2,000</p>
                                         </>
                                     )}
                                 </div>
