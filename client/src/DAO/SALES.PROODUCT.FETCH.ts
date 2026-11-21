@@ -2,7 +2,7 @@
 export const saleFetchData = async () => {
     // 1. Grab the base URL
     const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
-    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
+    const API_URL = AUTH_API ? "https://grow-sell-server.onrender.com" : "http://localhost:5000";
 
     console.log("ENV CHECK:", {
         VITE_AUTH_API_URL: import.meta.env.VITE_AUTH_API_URL,
@@ -38,7 +38,7 @@ export const saleFetchData = async () => {
 
 export const sales_income_summary = async () => {
     const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
-    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
+    const API_URL = AUTH_API ? "https://grow-sell-server.onrender.com" : "http://localhost:5000";
 
     try {
         const Response = await fetch(`${API_URL}/api/v2/addListingPlants/sales_income_summary`, {
@@ -68,7 +68,7 @@ export const sales_income_summary = async () => {
 
 export const Fecth_sales_income_product = async () => {
     const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
-    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
+    const API_URL = AUTH_API ? "https://grow-sell-server.onrender.com" : "http://localhost:5000";
 
 
     try {

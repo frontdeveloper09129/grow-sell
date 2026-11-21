@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 function AddListingPage() {
 
+
   // form state
   const [name, setName] = useState<string>("");
   const [typeOfPlants, setTypeOfPlants] = useState<string>("");
@@ -15,10 +16,13 @@ function AddListingPage() {
   const [matureSize, setMatureSize] = useState<string>("");
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
 
+  const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
+  const API_URL = AUTH_API ? "https://grow-sell-server.onrender.com" : "http://localhost:5000";
+
   const handleFormData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch("http://localhost:5000/api/v2/addListingPlants/products/addlisting_plants", {
+      const response = await fetch(`${API_URL}/api/v2/addListingPlants/products/addlisting_plants`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -84,7 +88,7 @@ function AddListingPage() {
 
   const Fetchproduct = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/v2/addListingPlants/products/getAllPlants", {
+      const response = await fetch(`${API_URL}/api/v2/addListingPlants/products/getAllPlants`, {
         method: "GET",
         credentials: "include",
       })

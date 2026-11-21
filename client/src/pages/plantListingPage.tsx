@@ -27,7 +27,7 @@ function PlantListingPage() {
 
   const ALLProducts = async () => {
     const AUTH_API: any = import.meta.env.VITE_AUTH_API_URL === 'true';
-    const API_URL = AUTH_API ? "https://grow-sell-1.onrender.com" : "http://localhost:5000";
+    const API_URL = AUTH_API ? "https://grow-sell-server.onrender.com" : "http://localhost:5000";
     const response = await fetch(`${API_URL}/api/v2/addListingPlants/products/getAllPlants`, {
       method: "GET",
       credentials: "include"
