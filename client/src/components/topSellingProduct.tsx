@@ -92,7 +92,7 @@ function TopSellingPlants() {
         <div className="w-full min-h-100 bg-white rounded-xl border border-[#d9ddd6] flex flex-col">
 
             {/* Header */}
-            <header className="w-full flex justify-between items-center p-5">
+            <header className="w-full flex flex-col items-start justify-between gap-3 p-4 sm:flex-row sm:items-center sm:p-5">
 
                 <div className="flex flex-col gap-1">
 

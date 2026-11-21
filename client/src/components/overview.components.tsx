@@ -163,11 +163,11 @@ function OverView() {
     }, [salesIncomeSummaryData])
 
     return (
-        <div className='w-full max-h-160 h-full'>
-            <header className="flex flex-col w-100% h-35 justify-between p-2 gap-3">
-                <div className='w-100% h-auto flex justify-between p-1'>
+        <div className='w-full'>
+            <header className="flex flex-col w-full justify-between p-2 gap-3">
+                <div className='w-full h-auto flex flex-col justify-between gap-3 p-1 sm:flex-row sm:items-start'>
                     <div>
-                        <h1 className=" flex w-100 h-10 text-2xl font-bold">
+                        <h1 className="flex w-full h-10 text-2xl font-bold">
                             Sales overview
                         </h1>
 
@@ -176,7 +176,7 @@ function OverView() {
                         </p>
                     </div>
 
-                    <div className="border border-slate-400 w-45 h-7 bg-[#ffff] rounded text-center justify-center">
+                    <div className="border border-slate-400 w-45 h-7 shrink-0 bg-[#ffff] rounded text-center justify-center">
                         <div className="flex gap-5 text-center justify-center">
                             <span>
                                 <i className="fa-solid fa-calendar"></i>
@@ -203,7 +203,7 @@ function OverView() {
                     </div>
                 </div>
 
-                <div className='w-100% h-full flex text-center bg-[#E8ECE5] rounded-xl gap-3 p-2'>
+                <div className='w-full flex flex-col text-left bg-[#E8ECE5] rounded-xl gap-1 p-3 sm:flex-row sm:items-center sm:gap-3 sm:text-center sm:p-2'>
                     <span>
                         <FontAwesomeIcon
                             icon={faCircleInfo}
@@ -224,9 +224,9 @@ function OverView() {
             {/* main content sale review */}
             <div className='w-full h-full'>
                 {/* sales analysis calculating product conatiner */}
-                <div className='p-2 w-full max-h-45 h-full flex justify-around gap-7'>
+                <div className='grid w-full grid-cols-1 gap-3 p-2 sm:grid-cols-2 xl:grid-cols-4 xl:gap-7'>
                     {/* total income */}
-                    <div className='w-75 h-40 rounded-xl bg-[#587655]'>
+                    <div className='w-full h-40 rounded-xl bg-[#587655]'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between p-2'>
                                 <p className='w-25 text-white size-1'>Total Income</p>
@@ -255,7 +255,7 @@ function OverView() {
                     </div>
 
                     {/* total product */}
-                    <div className='w-75 h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2 '>
                             <div className='w-full flex justify-between p-2'>
                                 <h1 className='w-full text-[#080808] size-1'>Total Product</h1>
@@ -282,7 +282,7 @@ function OverView() {
                     </div>
 
                     {/* units sold */}
-                    <div className='w-75 h-40 rounded-xl bg-[#FFFFFF]'>
+                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between p-2'>
                                 <p className='w-25 text-black size-1'>Unit Sold</p>
@@ -311,7 +311,7 @@ function OverView() {
                     </div>
 
                     {/* income change */}
-                    <div className='w-75 h-40 round-xl bg-[#FFFFFF]'>
+                    <div className='w-full h-40 rounded-xl bg-[#FFFFFF]'>
                         <div className='w-full h-full flex flex-col p-2'>
                             <div className='w-full h-10 flex justify-between p-2'>
                                 <p className='w-full text-black size-1'>Income Changes</p>
@@ -345,16 +345,16 @@ function OverView() {
                 </div>
 
                 {/* sales product analysis and top selling */}
-                <div className="w-full h-115 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full p-4">
+                <div className="w-full min-h-0 p-2 sm:p-4 lg:h-115 lg:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full">
 
-                    <div className="w-full min-h-full flex flex-col gap-10">
+                    <div className="w-full min-h-full flex flex-col gap-6 lg:gap-10">
 
                         {/* sales analysis */}
-                        <div className="w-full min-h-100 flex justify-between gap-10">
+                        <div className="w-full min-h-100 flex flex-col justify-between gap-6 xl:flex-row xl:gap-10">
 
                             <div className="flex-1 min-w-0 bg-[#FFFFFF] rounded-xl border border-[#d9ddd6]">
 
-                                <header className="w-full flex justify-between p-4">
+                                <header className="w-full flex flex-col justify-between gap-2 p-4 sm:flex-row">
                                     <div className="flex flex-col gap-5">
                                         <h1 className="font-bold text-xl text-gray-950">
                                             Income trend
@@ -425,7 +425,7 @@ function OverView() {
 
                                                                     {/* Bar */}
                                                                     <div
-                                                                        className="w-full max-w-14  bg-[#587655] rounded-t-md transition-[height duration-500 ease-in-out"
+                                                                        className="w-full max-w-14 bg-[#587655] rounded-t-md transition-[height] duration-500 ease-in-out"
                                                                         style={{
                                                                             height: barGraph ? `${barHeight}%` : "0%"
                                                                         }}
@@ -490,7 +490,7 @@ function OverView() {
 
                             </div>
 
-                            <div className="w-100 shrink-0 bg-[#FFFFFF] rounded-xl border border-[#d9ddd6] flex flex-col gap-4 p-2">
+                            <div className="w-full shrink-0 bg-[#FFFFFF] rounded-xl border border-[#d9ddd6] flex flex-col gap-4 p-2 xl:w-100">
                                 <header className='flex flex-col p-4'>
                                     <h1 className='text-[17px] font-medium'>Share income</h1>
                                     <p className='text-[15px]'>Product contribution · September 2026</p>
@@ -498,7 +498,7 @@ function OverView() {
 
 
                                 <div className="w-full max-h-100 h-full justify-center text-center">
-                                    <div className="w-full h-auto flex items-center gap-4 p-4">
+                                    <div className="w-full h-auto flex flex-col items-center gap-4 p-4 sm:flex-row">
 
                                         {/* 1. Outer circle: add 'relative' and 'overflow-hidden' */}
                                         <div className="relative w-48 h-48 rounded-full flex items-center justify-center overflow-hidden">

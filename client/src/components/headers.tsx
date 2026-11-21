@@ -6,7 +6,7 @@ export  function Headers() {
     const navigate = useNavigate();
     return (
         <div>
-             <header className="w-full h-15 pt-7 p-4 flex justify-between items-center">
+             <header className="w-full pt-7 p-4 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                     {/* left */}
                     <div className="flex flex-col">
                         <h1 className="text-2xl font-bold">Marketplace overvie</h1>
@@ -14,8 +14,8 @@ export  function Headers() {
                     </div>
 
                     {/* right */}
-                    <div className="flex gap-4 items-center justify-center">
-                        <div className="relative w-48 max-w-xs">
+                    <div className="flex w-full gap-3 items-center sm:w-auto sm:gap-4">
+                        <div className="relative min-w-0 flex-1 sm:w-48 sm:flex-none sm:max-w-xs">
                             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                             </div>

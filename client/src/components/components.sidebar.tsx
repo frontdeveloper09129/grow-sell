@@ -147,7 +147,7 @@ export function SideBar() {
         <div>
 
 
-            <aside className="max-w-75 w-full min-h-screen flex flex-col p-5 gap-10">
+            <aside className="w-full shrink-0 flex flex-col gap-4 p-4 lg:min-h-screen lg:max-w-75 lg:p-5 lg:gap-10">
                 <div className="w-full flex gap-4">
                     <div className="w-12.5 h-12.5 bg-[#587655] flex justify-center items-center text-center rounded-xl">
                         <h1 className="text-[#FFFFFF] text-sm">P</h1>
@@ -159,7 +159,7 @@ export function SideBar() {
                     </div>
                 </div>
 
-                <div className="bg-[#FFFFFF] w-64 h-16 rounded-2xl flex items-center p-3 shadow-sm border border-gray-100">
+                <div className="bg-[#FFFFFF] w-full lg:w-64 h-16 rounded-2xl flex items-center p-3 shadow-sm border border-gray-100">
                     <div className="bg-[#D9D9D9] w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-gray-700 shrink-0">
                         <h1>{profileName?.[0]?.toLocaleUpperCase() || "U"}</h1>
                     </div>
@@ -168,9 +168,9 @@ export function SideBar() {
                         <p className="text-xs text-gray-500 font-medium mt-0.5">Marketplace Owner</p>
                     </div>
                 </div>
-                <div className="w-57 h-full flex items-center justify-center">
-                    <nav className="w-full h-full flex flex-col gap-7">
-                        <ul className="flex flex-col gap-2">
+                <div className="w-full lg:w-57 h-full flex items-center justify-center">
+                    <nav className="w-full h-full flex flex-col gap-4 lg:gap-7">
+                        <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:flex lg:flex-col">
                             {list.map((item: any, index: number) => {
                                 const label =
                                     item.overview ??
@@ -182,7 +182,7 @@ export function SideBar() {
                                 return (
                                     <li
                                         key={index}
-                                        className={`w-57 h-10.5 rounded-xl flex items-center p-4 text-sm gap-2 cursor-pointer transition-colors duration-300 ease-in-out 
+                                        className={`w-full h-10.5 rounded-xl flex items-center p-3 lg:p-4 text-sm gap-2 cursor-pointer transition-colors duration-300 ease-in-out
                                                    ${item.isCorrect ? "bg-[#ffff]" : ""}
                                                `}
                                         onClick={() => ListHandleClick(index)}
@@ -194,7 +194,7 @@ export function SideBar() {
                             })}
                         </ul>
 
-                        <div className="bg-[#ffff] rounded-xl w-57 h-40 flex flex-col p-2 gap-2">
+                        <div className="bg-[#ffff] rounded-xl w-full h-40 flex flex-col p-2 gap-2">
                             <h1 className="text-l text-[#080808]"><strong>Future roadmap</strong></h1>
                             <p className="text-[12px]">
                                 Checkout and in-app purchasing are planned for the shop pages, but the current focus is on listing management and buyer outreach.

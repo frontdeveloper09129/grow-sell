@@ -42,17 +42,17 @@ export function Registration() {
     }
 
     return (
-        <div className="flex justify-center items-center text-center p-4">
-            <form className="w-full max-w[500px] h-[600px] flex flex-col gap-4 border flex items-center justify-center " onSubmit={handleSubmit}>
+        <div className="min-h-screen flex justify-center items-center text-center p-4">
+            <form className="w-full max-w-[500px] min-h-[600px] flex flex-col gap-4 border items-center justify-center p-4 sm:p-6" onSubmit={handleSubmit}>
                 <input
-                    className="w-[300px] h-[50px] border p-2"
+                    className="w-full max-w-[300px] h-[50px] border p-2"
                     type="fullname"
                     name="fullname"
                     placeholder="Fullname.."
                     onChange={(e) => setFullname(e.target.value)}
                 />
                 <input
-                    className="w-[300px] h-[50px] border p-2"
+                    className="w-full max-w-[300px] h-[50px] border p-2"
                     type="username"
                     name="username"
                     placeholder="Username.."
@@ -60,14 +60,14 @@ export function Registration() {
                 />
 
                 <input
-                    className="w-[300px] h-[50px] border p-2"
+                    className="w-full max-w-[300px] h-[50px] border p-2"
                     type="email"
                     name="email"
                     placeholder="email.."
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
-                    className="w-[300px] h-[50px] border p-2"
+                    className="w-full max-w-[300px] h-[50px] border p-2"
                     type="password"
                     name="password"
                     placeholder="Password.."
@@ -75,7 +75,7 @@ export function Registration() {
                 />
 
                 <input
-                    className="w-[300px] h-[50px] border p-2"
+                    className="w-full max-w-[300px] h-[50px] border p-2"
                     type="confirmPassword"
                     name="confirmPassword"
                     placeholder="Confirm Password.."

@@ -34,7 +34,7 @@ function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center p-4">
             <form
                 className="w-full max-w-125 flex flex-col gap-4 border p-6"
                 onSubmit={handleSubmit}

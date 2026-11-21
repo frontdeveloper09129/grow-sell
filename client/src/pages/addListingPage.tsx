@@ -117,12 +117,12 @@ function AddListingPage() {
 
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#F3F5F1]">
+    <div className="flex min-h-screen w-full bg-[#F3F5F1]">
       {/* Main Content */}
-      <main className="flex min-w-0 flex-1 flex-col overflow-hidden p-5 lg:p-6">
+      <main className="flex min-w-0 flex-1 flex-col p-3 sm:p-5 lg:p-6">
 
         {/* Header: stays fixed, does not scroll */}
-        <header className="mb-5 flex shrink-0 items-start justify-between gap-4">
+        <header className="mb-5 flex flex-col items-start justify-between gap-4 sm:flex-row">
           <div>
             <h1 className="text-xl font-bold text-[#292E27]">
               Add new plant listing
@@ -139,10 +139,10 @@ function AddListingPage() {
         </header>
 
         {/* Only this content area takes the remaining height */}
-        <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden xl:grid-cols-[1.15fr_0.95fr]">
+        <div className="grid flex-1 grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.95fr]">
 
           {/* Left: Form scrolls independently */}
-          <section className="min-h-0 min-w-0 overflow-y-auto rounded-xl border border-[#DFE4DC] bg-white p-5">
+          <section className="min-w-0 rounded-xl border border-[#DFE4DC] bg-white p-4 sm:p-5 xl:min-h-0 xl:overflow-y-auto">
 
             {/* Keep your complete plant form here */}
             <h2 className="text-base font-semibold text-[#354231]">
@@ -359,7 +359,7 @@ function AddListingPage() {
           </section>
 
           {/* Right: Previously Added Plants scroll independently */}
-          <section className="min-h-0 min-w-0 overflow-y-auto rounded-xl border border-[#DFE4DC] bg-white p-5">
+          <section className="min-w-0 rounded-xl border border-[#DFE4DC] bg-white p-4 sm:p-5 xl:min-h-0 xl:overflow-y-auto">
 
             <div className="mb-5 flex flex-wrap items-start justify-between gap-2">
               <div>
